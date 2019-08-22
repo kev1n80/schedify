@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="static/css/profile.css">
+  </head>
+  <body>
+    <!-- Nav bar -->
+    <header>
+      <div class="container">
+        <a href = "https://schedify.appspot.com">
+      <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+       </a>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/event-feed">Events</a></li>
+            <li><a href="/connections">Connections</a></li>
+            <li><a href="/profile">Profile</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  <h1 id="profile_page">Profile</h1>
+<div id="user_picture">
+  <!-- <img src="https://png.pngtree.com/svg/20170602/user_circle_1048392.png" alt="profile picture" height="120px"> -->
+</div>
+<div id="user_info">
+    <h1>{{user_instance.username}}</h1>
+    <!-- displays user profile -->
+    <!-- {% if account == "self" %}
+      <button type="button" name="button">
+        <a href="/profile">Settings</a>
+      </button>
+    {% endif %} -->
+
+    <!-- displays friend profile -->
+    {% if account == "other" %}
+
+      <form class="" action="/profile" method="post">
+        <input type="hidden" name="username_searchid" value="{{search_id}}">
+        <!-- if they are not in your friend list -->
+        {% if friend_status == false %}
+          {% if request_status == false %}
+            <input type="submit" name="friend_status" value="add friend">
+          {% endif %}
+          {% if request_status == true %}
+            <input type="submit" name="friend_status" value="request">
+          {% endif %}
+        {% endif %}
+
+        <!-- if they are in your friends list -->
+        {% if friend_status == true %}
+          <input type="submit" name="friend_status" value="remove friend">
+        {% endif %}
+        <input type="hidden" name="username_search" value={{user_name}}>
+      </form>
+    {% endif %}
+    <h5>{{user_instance.first_name}} {{user_instance.last_name}}</h5>
+    <div class="bio">
+      <p>"{{user_instance.bio}}"</p>
+    </div>
+</div>
+<br>
+<br>
+{% if account == "self" %}
+<div id="settings_button">
+  <form class="" action="/setting" method="get">
+    <input type="hidden" name="user_id" value="{{user_instance.key.id()}}">
+    <input type="submit" name="" value="Settings">
+  </form>
+  <br>
+  <button><a href="{{sign_out}}" type="button" name="button" id="anchor_id">Sign out</a></button>
+</div>
+{% endif %}
+  </body>
+</html>

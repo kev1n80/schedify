@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Setting</title>
+    <link rel="stylesheet" href="static/css/setting.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href = "https://schedify.appspot.com">
+      <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+       </a>
+        <nav>
+        </nav>
+      </div>
+    </header>
+    <h1 id="settings_header">Settings</h1>
+    <form class="" action="/profile" method="get">
+      <input type="submit" name="" value="Go back" id="go_back">
+    </form>
+
+    <div id="tamakikotatsu_isbestgirl">
+        <form class="" action="/setting" method="post">
+          <input type="hidden" name="user_id" value="{{user.key.id()}}">
+          Change username:<br>
+          <input type="text" name="new_username" value="{{user.username}}">
+          <br>
+          Change first name:<br>
+          <input type="text" name="new_first_name" value="{{user.first_name}}">
+          <br>
+          Change last name:<br>
+          <input type="text" name="new_last_name" value="{{user.last_name}}">
+          <br>
+          Add bio:<br>
+          <input type="text" name="new_bio" value="{{user.bio}}">
+          <br>
+          <br>
+          <input type="submit" name="" value="Add">
+        </form>
+        <br>
+        <form class="" action="/delete" method="get">
+          <input type="hidden" name="user_id" value="{{user.key.id()}}">
+          <input type="submit" name="delete_user" value="Delete user">
+        </form>
+    </div>
+  </body>
+</html>

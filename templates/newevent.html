@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Make an Event!</title>
+    <link rel="stylesheet" href="../static/css/newevent.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href = "https://schedify.appspot.com">
+      <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+       </a>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/event-feed">Events</a></li>
+            <li><a href="/connections">Connections</a></li>
+            <li><a href="/profile">Profile</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+      <h1 id="create_event">Create an Event!</h1>
+        <div id="go_back">
+          <button type="button" name="button">
+            <a href="/event-feed" id="back_button">Go Back</a>
+          </button>
+        </div>
+    <div class="container">
+      <div id="input_event">
+      <form method="post" action="/new_event">
+
+        Title:<br>
+        <input type="text" name="event_title">
+        <br>
+        Description:<br>
+        <input type="text" name="event_summary">
+        <br>
+        <input type="submit">
+        <br>
+
+        <!-- Filled button so EventFeedHandler can run -->
+
+      </form>
+      </div>
+    </div>
+  </body>
+</html>

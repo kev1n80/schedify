@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/static/css/event.css">
+  </head>
+    <title>Events</title>
+
+
+  <body>
+    <!-- Nav bar -->
+    <header>
+    <div class="container">
+      <h5 class="logo">Schedify</h5>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    <h1 id="events_header">{{event_title}}</h1>
+    <div id="event_text">
+      <h1>{{owner_instance.first_name}}'s Event:</h1>
+
+      <!-- Allows Owner to access event setting -->
+      {% if owner_instance.key == user_instance.key %}
+        <form class="" action="/event_setting" method="get">
+          <input type="hidden" name="event_id" value="{{event_instancekey.id()}}">
+          <div id="event_settings">
+          <input type="submit" name="" value="Settings">
+        </div>
+      {% endif %}
+      </form>
+        <div class=row>
+          <div class=img></div>
+          <div class=description>
+            <p> {{event_description}}</p>
+          </div>
+
+          <ul>Attending:</ul>
+          {% for attending_userkey in attendingkey_list %}
+            {% set attending_user =  attending_userkey.get() %}
+            <li>{{attending_user.first_name}} {{attending_user.last_name}}</li>
+          {% endfor %}
+
+          <ul>Not Attending:</ul>
+          {% for absentee_key in abesntkey_list %}
+            {% set absentee =  absentee_key.get() %}
+            <li>{{absentee.first_name}} {{absentee.last_name}}</li>
+          {% endfor %}
+
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/static/css/event-feed.css">
+  </head>
+    <title>Events</title>
+
+
+  <body>
+    <!-- Nav bar -->
+    <header>
+    <div class="container">
+      <a href = "https://schedify.appspot.com">
+    <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+     </a>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    <h1 id="events_header">Events</h1>
+
+<div id="body_div">
+   <div id="event-div">
+     <form class="" action="/event-feed" method="post">
+       <select name="event-type">
+        <option value="all">All Events</option>
+        <option value="self">My Events</option>
+        <option value="friends">Friend Events</option>
+      </select>
+      <input type="submit" name="" value="Launch">
+     </form>
+     <br>
+      <button type="button" name="button">
+        <a href="/new_event" id="create_event">Create Event</a>
+      </button>
+    <br>
+    <br>
+    <br>
+
+
+  {% for event in event_info %}
+    <div class=row>
+      <div class=img></div>
+      <div class=description></div>
+        <p id="title_text">Title: {{event.title}} </p>
+        {% set owner = event.owner.get() %}
+        <p>Owner: {{owner.username}}</p>
+        <p id="paragraph_text">Summary: {{event.summary}}</p>
+
+        <!-- go to event button -->
+        <form class="" action=/event method="post">
+          <input type="hidden" name="event_searchid" value={{event.key.id()}}>
+          <input type="submit" name="" value="Go">
+        </form>
+
+        <!-- attending buttons -->
+
+        <form class="" action=/event-feed method="post">
+          <input type="hidden" name="event_searchid" value={{event.key.id()}}>
+          {% if attending_list[loop.index0] == "no" %}
+            <input type="submit" name="attendance" value="Will be attending">
+
+          {% elif attending_list[loop.index0] == "yes" %}
+            <input type="submit" name="attendance" value="Will no longer attend">
+
+          {% else %}
+            <input type="submit" name="attendance" value="Attending">
+            <input type="submit" name="attendance" value="Will not attend">
+
+          {% endif %}
+        </form>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+  </body>
+</html>

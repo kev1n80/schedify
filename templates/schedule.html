@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<title>My Calendar</title>
+<link rel="stylesheet" href="../static/css/schedule.css">
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href = "https://schedify.appspot.com">
+    <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+     </a>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<div>
+  <div>
+    <h1 id="my_calendar">My Calendar</h1>
+  </div>
+</div>
+
+<div id="body">
+  <div class="yourSchedule">
+    <div id="rMenuButton">
+    <button class="rMenuButton" onclick="openRightMenu()">Choose a Connection</button>
+  </div>
+    <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
+      <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
+      <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
+
+        {% for friend_key in friend_list %}
+          {% set friend = friend_key.get() %}
+          {% set currentEmail = friend.email%}
+          {% set index = loop.index%}
+          {% set friendIndex = index%}
+          {% set list1 = currentEmail.split('@') %}
+          {% set friendEmailStart = list1[0] %}
+          <a id= "{{friend.email}}" class="compareAnchor" href="#{{index}}" class="sidebarbutton">,     {{friend.first_name}} {{friend.last_name}}</a>
+
+          {% endfor %}
+            </div>
+            <br>
+
+            <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
+          </div>
+          <div class="compare">
+            <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+            <br><br><br>
+            <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src=schedifyTeam%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+            <br><br><br>
+
+      <br><br><br>
+
+  </div>
+</div>
+
+<script>
+
+function openRightMenu() {
+  document.getElementById("rightMenu").style.display = "block";
+}
+
+function closeRightMenu() {
+  document.getElementById("rightMenu").style.display = "none";
+}
+</script>
+
+<script src="static/js/script.js" type="text/javascript"></script>
+
+</body>
+</html>
